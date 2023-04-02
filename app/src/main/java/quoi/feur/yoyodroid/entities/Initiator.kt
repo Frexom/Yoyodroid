@@ -1,18 +1,28 @@
 package quoi.feur.yoyodroid.entities
 
-class Initiator {
+import android.database.sqlite.SQLiteDatabase
+import org.json.JSONArray
+import java.util.*
 
-    lateinit var id : Integer
-    lateinit var name : String
-    lateinit var email : String
-    lateinit var pass : String
-    lateinit var level:Level
+class Initiator(val id : Int, var name : String, var email : String, var password : String, var director : Boolean, var levelId: Int, var deleted : Boolean) {
+    companion object{
 
-    constructor(id:Integer, name:String, email:String, pass:String,level: Level){
-        this.id=id
-        this.name = name
-        this.email = email
-        this.pass = pass
-        this.level = level
+        var all : List<Initiator> = LinkedList<Initiator>()
+        fun createListFromJSONArray(array: JSONArray) : LinkedList<Initiator> {
+            val initiatorList = LinkedList<Initiator>()
+            for(i in 0  until array.length()){
+                var json = array.getJSONObject(i)
+                var id = json.getInt("id")
+                var name = json.getString("name")
+                var email = json.getString("email")
+                var password = json.getString("password")
+                var director = json.getBoolean("director")
+                var levelId = json.getInt("levelId")
+                var deleted = json.getBoolean("deleted")
+
+                initiatorList.add(Initiator(id, name, email, password, director, levelId, deleted))
+            }
+            return initiatorList
+        }
     }
 }
