@@ -1,6 +1,7 @@
 package quoi.feur.yoyodroid.entities
 
 import org.json.JSONArray
+import java.security.cert.PKIXRevocationChecker.Option
 import java.util.*
 
 class Aptitude(val id : Int, var name : String, var skillId : Int, var deleted : Boolean) {
@@ -21,6 +22,15 @@ class Aptitude(val id : Int, var name : String, var skillId : Int, var deleted :
                 aptitudeList.add(Aptitude(id, name, skillId, deleted))
             }
             return aptitudeList
+        }
+
+        fun findbyId(id : Int) : Aptitude?{
+            all.forEach {aptitude ->
+                if(aptitude.id == id){
+                    return aptitude
+                }
+            }
+            return null
         }
     }
 }

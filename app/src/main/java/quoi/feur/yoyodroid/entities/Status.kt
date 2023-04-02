@@ -18,6 +18,15 @@ enum class Status {
         }
     }
 
+    public override fun toString(): String {
+        return when (this) {
+            NON_EVALUE -> "Non-évlaué"
+            ABSENT -> "Absent"
+            EN_COURS -> "En cours"
+            ACQUIS -> "Acquis"
+        }
+    }
+
     fun getCouleur():String{
         return when (this) {
             NON_EVALUE -> "#F3F3F3"

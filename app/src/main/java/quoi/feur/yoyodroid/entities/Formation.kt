@@ -23,6 +23,15 @@ class Formation (val id:Int, var name:String, var levelId: Int, var deleted:Bool
             }
             return formList
         }
+
+        fun findbyId(id : Int) : Formation?{
+            Formation.all.forEach { formation ->
+                if(formation.id == id){
+                    return formation
+                }
+            }
+            return null
+        }
     }
 
     public override fun toString(): String {

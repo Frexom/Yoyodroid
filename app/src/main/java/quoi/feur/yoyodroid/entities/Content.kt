@@ -21,5 +21,14 @@ class Content (val id : Int, var sessionId : Int, var aptitudeId : Int) {
             }
             return contentList
         }
+
+        fun findbyId(id : Int) : Content?{
+            Content.all.forEach { content ->
+                if(content.id == id){
+                    return content
+                }
+            }
+            return null
+        }
     }
 }

@@ -1,6 +1,7 @@
 package quoi.feur.yoyodroid.entities
 
 import android.database.sqlite.SQLiteDatabase
+import androidx.compose.ui.text.capitalize
 import org.json.JSONArray
 import java.util.*
 
@@ -23,5 +24,30 @@ class Student (val id : Int, var name: String, var formationId : Int, var phone 
             }
             return studentList
         }
+
+        fun findByFormationId(id: Int) : LinkedList<Student>{
+
+            val found = LinkedList<Student>()
+
+            all.forEach{student ->
+                if(student.formationId == id){
+                    found.add(student)
+                }
+            }
+            return found
+        }
+
+        fun findbyId(id : Int) : Student?{
+            Student.all.forEach { student ->
+                if(student.id == id){
+                    return student
+                }
+            }
+            return null
+        }
+    }
+
+    public override fun toString(): String {
+        return name.lowercase().split(" ").joinToString(separator = " ", transform = String::capitalize)
     }
 }

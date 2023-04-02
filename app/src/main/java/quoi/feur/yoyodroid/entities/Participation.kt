@@ -26,5 +26,20 @@ class Participation ( val id : Int, var contentId : Int, var studentId : Int, va
             }
             return participationList
         }
+
+        fun findByStudentId(id:Int): LinkedList<Participation>{
+            val found = LinkedList<Participation>()
+            all.forEach{participation ->
+                if(participation.studentId == id){
+                    found.add(participation)
+                }
+            }
+            return found
+        }
+    }
+
+    public override fun toString(): String {
+        val statusString = status.toString()
+        return Aptitude.findbyId( Content.findbyId(contentId)!!.aptitudeId)!!.name.plus( " : $statusString")
     }
 }
