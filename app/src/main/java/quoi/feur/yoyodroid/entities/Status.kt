@@ -1,24 +1,28 @@
 package quoi.feur.yoyodroid.entities
 
+
 enum class Status {
     NON_EVALUE,ABSENT,EN_COURS,ACQUIS;
 
     companion object{
+
+        val all : Array<Status> = arrayOf(NON_EVALUE, ABSENT, EN_COURS, ACQUIS)
         fun getStatus(index : Int) : Status{
-            var indexModulo = (index % 4) + 1
+            val indexModulo = (index % 4) + 1
             return when (indexModulo){
-                1 -> Status.NON_EVALUE
-                2 -> Status.ABSENT
-                3 -> Status.EN_COURS
-                4 -> Status.ACQUIS
+                1 -> NON_EVALUE
+                2 -> ABSENT
+                3 -> EN_COURS
+                4 -> ACQUIS
                 else -> {
                     throw Exception("This isn't supposed to happen")
                 }
             }
         }
+
     }
 
-    public override fun toString(): String {
+    override fun toString(): String {
         return when (this) {
             NON_EVALUE -> "Non-évlaué"
             ABSENT -> "Absent"
@@ -35,4 +39,14 @@ enum class Status {
             ACQUIS -> "#7FFF7F"
         }
     }
+
+    fun getId() : Int{
+        return when (this) {
+            NON_EVALUE -> 1
+            ABSENT -> 2
+            EN_COURS -> 3
+            ACQUIS -> 4
+        }
+    }
+
 }

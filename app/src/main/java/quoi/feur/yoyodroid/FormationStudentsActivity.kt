@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import quoi.feur.yoyodroid.entities.Formation
 import quoi.feur.yoyodroid.entities.Student
 
@@ -16,13 +15,12 @@ class FormationStudentsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_formation_students)
 
         //Checking request
-        val intent : Intent = getIntent()
         val formationId : Int = intent.getIntExtra("formationId", -1)
 
         if(formationId == -1){
             finish()
         }
-        findViewById<TextView>(R.id.header3).text = Formation.findbyId(formationId).toString()
+        findViewById<TextView>(R.id.header3).text = Formation.findById(formationId).toString()
 
         val students = Student.findByFormationId(formationId)
 
@@ -40,9 +38,9 @@ class FormationStudentsActivity : AppCompatActivity() {
                 ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, students)
             studentList.adapter = adapter
 
-            studentList.setOnItemClickListener { adapterView, view, position, id ->
-                val intent : Intent = Intent(this, StudentEvalActivity::class.java)
-                intent.putExtra("studentId", students.get(position).id)
+            studentList.setOnItemClickListener { _, _, position, _ ->
+                val intent = Intent(this, StudentEvalActivity::class.java)
+                intent.putExtra("studentId", students[position].id)
                 startActivity(intent)
             }
         }

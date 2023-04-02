@@ -6,15 +6,15 @@ import java.util.*
 class Level (val id : Int, var name : String, var deleted : Boolean) {
     companion object{
 
-        var all : List<Level> = LinkedList<Level>()
+        var all : LinkedList<Level> = LinkedList<Level>()
 
         fun createListFromJSONArray(array: JSONArray) : LinkedList<Level> {
             val levelList = LinkedList<Level>()
             for (i in 0 until array.length()) {
-                var json = array.getJSONObject(i)
-                var id = json.getInt("id")
-                var name = json.getString("name")
-                var deleted = json.getBoolean("deleted")
+                val json = array.getJSONObject(i)
+                val id = json.getInt("id")
+                val name = json.getString("name")
+                val deleted = json.getBoolean("deleted")
 
                 levelList.add(Level(id, name, deleted))
             }

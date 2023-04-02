@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
-import org.w3c.dom.Text
 import quoi.feur.yoyodroid.entities.Formation
 
 class FormationsActivity : AppCompatActivity() {
@@ -23,9 +21,9 @@ class FormationsActivity : AppCompatActivity() {
         val adapter : ArrayAdapter<Formation> = ArrayAdapter<Formation>(this, android.R.layout.simple_list_item_1, Formation.all)
         formationsList.adapter = adapter
 
-        formationsList.setOnItemClickListener{ adapterView, view, position, id ->
-            val intent : Intent = Intent(this, FormationStudentsActivity::class.java)
-            intent.putExtra("formationId", Formation.all.get(position).id)
+        formationsList.setOnItemClickListener{ _, _, position, _ ->
+            val intent = Intent(this, FormationStudentsActivity::class.java)
+            intent.putExtra("formationId", Formation.all[position].id)
             startActivity(intent)
         }
     }

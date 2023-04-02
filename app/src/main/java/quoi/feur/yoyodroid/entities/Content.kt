@@ -12,23 +12,44 @@ class Content (val id : Int, var sessionId : Int, var aptitudeId : Int) {
         fun createListFromJSONArray(array: JSONArray) : LinkedList<Content> {
             val contentList = LinkedList<Content>()
             for(i in 0  until array.length()){
-                var json = array.getJSONObject(i)
-                var id = json.getInt("id")
-                var sessionId = json.getInt("sessionId")
-                var skillId = json.getInt("aptitudeId")
+                val json = array.getJSONObject(i)
+                val id = json.getInt("id")
+                val sessionId = json.getInt("sessionId")
+                val skillId = json.getInt("aptitudeId")
 
                 contentList.add(Content(id, sessionId, skillId))
             }
             return contentList
         }
 
-        fun findbyId(id : Int) : Content?{
-            Content.all.forEach { content ->
+        fun findById(id : Int) : Content?{
+            all.forEach { content ->
                 if(content.id == id){
                     return content
                 }
             }
             return null
+        }
+
+        fun findBySessionAndAptitudeId(sessionId : Int, aptitudeId : Int) : Content?{
+            all.forEach { content ->
+                if(content.sessionId == sessionId && content.aptitudeId == aptitudeId){
+                    return content
+                }
+            }
+            return null
+        }
+
+
+        fun getUnusedId(): Int{
+            var max = 0
+            all.forEach{ content ->
+
+                if(content.id > max){
+                    max = content.id
+                }
+            }
+            return max+1
         }
     }
 }
